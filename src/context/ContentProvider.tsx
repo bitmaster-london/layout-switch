@@ -1,11 +1,6 @@
 import React, { createContext, useReducer, FC, ReactNode } from 'react';
+import { Photo } from '../types';
 
-export type Photo = {
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-};
 
 export type State = {
   photos: Photo[];
@@ -31,7 +26,8 @@ export const ContentContext = createContext<ContextType>({
 
 type Action = 
   | { type: 'FETCH_PHOTOS'; payload: Photo[]; }
-  | { type: 'SET_ERROR'; payload: string };
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_LOADING' };
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -47,6 +43,12 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         loading: false,
         error: action.payload
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
+        error: null
       };
     default:
       return state;
