@@ -1,3 +1,39 @@
-.layoutButtons {
-  display: flex;
+.home {
+  padding: 5em;
+
+  .layoutSwitch {
+    display: flex;
+    justify-content: flex-end;
+
+    .buttons {
+      display: flex;
+      border: 1px solid #222;
+      border-radius: 1em;
+      padding: .5em 1.5em;
+      justify-content: space-between;
+      cursor: pointer;
+  
+      .button {
+        padding: 0 5px;
+  
+        &:hover {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
 }
+
+@media screen and (max-width: 575px) {
+
+  .home {
+    padding: 1em;
+
+    .layoutSwitch {
+      .buttons {
+        flex: 1;
+      }
+    }
+  }
+}
+

@@ -17,16 +17,26 @@ const Home = ({ layout }: HomeProps) => {
   }
 
   return (
-    <div className="home">
+    <div className={styles.home}>
       <h1>Photos</h1>
-      <div className={styles.layoutButtons}>
-        <div className="button">
-          <img src={`${iconsPath}/reorder.svg`} alt="List icon" />
-        </div>
-        <div className="button">
-          <img src={`${iconsPath}/grid_view.svg`} alt="Grid icon" />
+
+      <div className={styles.layoutSwitch}>
+        <div className={styles.buttons}>
+          <div className={styles.button}>
+            <img src={`${iconsPath}/reorder.svg`} alt="List view" />
+          </div>
+          <div className={styles.button}>
+            <img src={`${iconsPath}/view_column.svg`} alt="Cards view" />
+          </div>
+          <div className={styles.button}>
+            <img src={`${iconsPath}/swipe.svg`} alt="Slider view" />
+          </div>
+          <div className={styles.button}>
+            <img src={`${iconsPath}/grid_view.svg`} alt="Grid view" />
+          </div>
         </div>
       </div>
+
       <ul className={layout === LayoutType.Grid ? 'grid' : 'list'}>
         {photos.map((photo: Photo) => (
           <li key={photo.id}>
