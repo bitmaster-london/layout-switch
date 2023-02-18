@@ -1,0 +1,39 @@
+.cards {
+  margin-top: 4em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2em;
+
+
+  .card {
+    flex-shrink: 1;
+    flex-basis: 0%;
+    background-color: #f2f2f2;
+    border-radius: .5em;
+
+    img {
+      border-radius: .5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      padding: 1em;  
+      margin-top: .1em; 
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .cards {
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .card {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

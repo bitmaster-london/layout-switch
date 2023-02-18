@@ -3,7 +3,7 @@ import { ContentContext } from '../context/ContentProvider';
 import { Photo } from '../types';
 import styles from '../styles/List.module.scss';
 
-export const List: FC = () => {
+const List: FC = () => {
   const {
     state: { photos },
   } = useContext(ContentContext);
@@ -27,3 +27,5 @@ export const List: FC = () => {
 
   return <div>{renderPhotos()}</div>;
 };
+
+export default List;

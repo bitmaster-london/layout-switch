@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { LayoutType } from '../types';
 import useFetchPhotos from '../hooks/useFetchPhotos';
 import styles from '../styles/Home.module.scss';
-import { List } from '../components/List';
+import List from '../components/List';
 import Cards from '../components/Cards';
 import Slider from '../components/Slider';
-import { Grid } from '../components/Grid';
+import Grid from '../components/Grid';
 
 const iconsPath = process.env.PUBLIC_URL + '/icons';
 
-const Home = () => {
-  const { loading, error, photos } = useFetchPhotos();
+const Home: FC = () => {
+  const { loading, error } = useFetchPhotos();
   const [layout, setLayout] = useState(LayoutType.List);
 
   const renderPhotos = () => {
@@ -35,35 +35,32 @@ const Home = () => {
 
       <div className={styles.layoutSwitch}>
         <div className={styles.buttons}>
-          <div className={styles.button}>
+          <div
+            className={styles.button}
+            onClick={() => setLayout(LayoutType.List)}>
             <img src={`${iconsPath}/reorder.svg`} alt="List view" />
           </div>
-          <div className={styles.button}>
+          <div
+            className={styles.button}
+            onClick={() => setLayout(LayoutType.Cards)}>
             <img src={`${iconsPath}/view_column.svg`} alt="Cards view" />
           </div>
-          <div className={styles.button}>
+          <div
+            className={styles.button}
+            onClick={() => setLayout(LayoutType.Slider)}>
             <img src={`${iconsPath}/swipe.svg`} alt="Slider view" />
           </div>
-          <div className={styles.button}>
+          <div
+            className={styles.button}
+            onClick={() => setLayout(LayoutType.Grid)}>
             <img src={`${iconsPath}/grid_view.svg`} alt="Grid view" />
           </div>
         </div>
       </div>
 
       {renderPhotos()}
-
-      {/* <div className={styles.layoutView}>
-        {photos.map((photo: Photo) => (
-          <div key={photo.id}>
-            <img src={photo.thumbnailUrl} alt={photo.title} />
-            <p>{photo.title}</p>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
-
-  // return <div>{renderPhotos()}</div>;
 };
 
 export default Home;
