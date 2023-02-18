@@ -1,7 +1,6 @@
 export enum LayoutType {
   Grid = 'grid',
-  Carousel = 'carousel',
+  Slider = 'slider',
   Cards = 'cards',
-  List = 'list'
+  List = 'list',
 }
-  

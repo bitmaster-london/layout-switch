@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 import { ContentContext } from '../context/ContentProvider';
-import { LayoutType } from '../types/LayoutType';
+import { Photo } from '../types';
+import styles from '../styles/List.module.scss';
 
-type Props = {
-  layout: LayoutType;
-};
-
-export const List: React.FC<Props> = ({ layout }) => {
+export const List: FC = () => {
   const {
     state: { photos },
   } = useContext(ContentContext);
@@ -15,6 +12,17 @@ export const List: React.FC<Props> = ({ layout }) => {
     if (!photos.length) {
       return <div>Loading...</div>;
     }
+
+    return (
+      <div className={styles.photos}>
+        {photos.map((photo: Photo) => (
+          <div key={photo.id} className={styles.photo}>
+            <img src={photo.thumbnailUrl} alt={photo.title} />
+            <p>{photo.title}</p>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return <div>{renderPhotos()}</div>;

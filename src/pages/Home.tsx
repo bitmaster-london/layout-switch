@@ -1,20 +1,33 @@
-import React from 'react';
-import { LayoutType, HomeProps, Photo } from '../types';
+import React, { useState } from 'react';
+import { LayoutType } from '../types';
 import useFetchPhotos from '../hooks/useFetchPhotos';
 import styles from '../styles/Home.module.scss';
+import { List } from '../components/List';
+import Cards from '../components/Cards';
+import Slider from '../components/Slider';
+import { Grid } from '../components/Grid';
 
 const iconsPath = process.env.PUBLIC_URL + '/icons';
 
-const Home = ({ layout }: HomeProps) => {
+const Home = () => {
   const { loading, error, photos } = useFetchPhotos();
+  const [layout, setLayout] = useState(LayoutType.List);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const renderPhotos = () => {
+    switch (layout) {
+      case LayoutType.Cards:
+        return <Cards />;
+      case LayoutType.Slider:
+        return <Slider />;
+      case LayoutType.Grid:
+        return <Grid />;
+      default:
+        return <List />;
+    }
+  };
 
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (loading) return <h1>Loading...</h1>;
+  if (error) return <h1>{error}</h1>;
 
   return (
     <div className={styles.home}>
@@ -37,16 +50,20 @@ const Home = ({ layout }: HomeProps) => {
         </div>
       </div>
 
-      <ul className={layout === LayoutType.Grid ? 'grid' : 'list'}>
+      {renderPhotos()}
+
+      {/* <div className={styles.layoutView}>
         {photos.map((photo: Photo) => (
-          <li key={photo.id}>
+          <div key={photo.id}>
             <img src={photo.thumbnailUrl} alt={photo.title} />
             <p>{photo.title}</p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div> */}
     </div>
   );
+
+  // return <div>{renderPhotos()}</div>;
 };
 
 export default Home;

@@ -1,0 +1,17 @@
+.photos {
+  margin-top: 3em;
+
+  .photo {
+      display: flex;
+      margin: 1em 0;
+
+      img {
+        border-radius: .5em;
+      }
+
+      p {
+        padding: 1em;
+        font-size: 1.5em;
+      }
+  }
+}
