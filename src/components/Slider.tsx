@@ -7,7 +7,6 @@ import { Photo } from '../types';
 export const Slider: FC = () => {
   const [sliderWidth, setSliderWidth] = useState(0);
   const sliderRef = useRef<any>();
-  // const controls = useAnimation();
   const {
     state: { photos },
   } = useContent();
@@ -34,7 +33,6 @@ export const Slider: FC = () => {
             <div
               style={{ backgroundImage: `url(${photo.url})` }}
               className={styles.img}></div>
-            {/* <img src={photo.url} alt={photo.title} className={styles.img} /> */}
           </motion.div>
         ))}
       </motion.div>

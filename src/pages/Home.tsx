@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { LayoutType } from '../types';
 import useFetchPhotos from '../hooks/useFetchPhotos';
 import styles from '../styles/Home.module.scss';
@@ -9,9 +9,38 @@ import Grid from '../components/Grid';
 
 const iconsPath = process.env.PUBLIC_URL + '/icons';
 
+type Switch = {
+  layout: LayoutType;
+  icon: string;
+  alt: string;
+};
+
 const Home: FC = () => {
   const { loading, error } = useFetchPhotos();
   const [layout, setLayout] = useState(LayoutType.List);
+
+  const switches: Switch[] = [
+    {
+      layout: LayoutType.List,
+      icon: 'reorder.svg',
+      alt: 'List view',
+    },
+    {
+      layout: LayoutType.Cards,
+      icon: 'view_column.svg',
+      alt: 'Cards view',
+    },
+    {
+      layout: LayoutType.Slider,
+      icon: 'swipe.svg',
+      alt: 'Slider view',
+    },
+    {
+      layout: LayoutType.Grid,
+      icon: 'grid_view.svg',
+      alt: 'Grid view',
+    },
+  ];
 
   const renderPhotos = () => {
     switch (layout) {
@@ -35,26 +64,15 @@ const Home: FC = () => {
 
       <div className={styles.layoutSwitch}>
         <div className={styles.buttons}>
-          <div
-            className={styles.button}
-            onClick={() => setLayout(LayoutType.List)}>
-            <img src={`${iconsPath}/reorder.svg`} alt="List view" />
-          </div>
-          <div
-            className={styles.button}
-            onClick={() => setLayout(LayoutType.Cards)}>
-            <img src={`${iconsPath}/view_column.svg`} alt="Cards view" />
-          </div>
-          <div
-            className={styles.button}
-            onClick={() => setLayout(LayoutType.Slider)}>
-            <img src={`${iconsPath}/swipe.svg`} alt="Slider view" />
-          </div>
-          <div
-            className={styles.button}
-            onClick={() => setLayout(LayoutType.Grid)}>
-            <img src={`${iconsPath}/grid_view.svg`} alt="Grid view" />
-          </div>
+          {switches.map((s: Switch) => (
+            <div
+              className={`${styles.button} ${
+                layout === s.layout ? styles.active : ''
+              }`}
+              onClick={() => setLayout(s.layout)}>
+              <img src={`${iconsPath}/${s.icon}`} alt={s.alt} />
+            </div>
+          ))}
         </div>
       </div>
 

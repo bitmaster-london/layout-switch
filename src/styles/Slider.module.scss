@@ -3,18 +3,14 @@
   overflow: hidden;
   cursor: grab;
   margin: 2em 0;
-  // background: salmon;
 
   .slides {
     display: flex;
-    // background-color: lightblue;
 
     .slide {
       margin: 2em;
       min-width: 30rem;
       min-height: 30rem;
-      // pointer-events: none;
-      // user-select: none;
       
       .img {
         border-radius: .5em;
