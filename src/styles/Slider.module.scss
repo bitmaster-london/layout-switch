@@ -1,0 +1,33 @@
+
+.slider {
+  overflow: hidden;
+  cursor: grab;
+  margin: 2em 0;
+  // background: salmon;
+
+  .slides {
+    display: flex;
+    // background-color: lightblue;
+
+    .slide {
+      margin: 2em;
+      min-width: 30rem;
+      min-height: 30rem;
+      // pointer-events: none;
+      // user-select: none;
+      
+      .img {
+        border-radius: .5em;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .slider {
+    margin: 0 1em 1em; 
+  }
+}
