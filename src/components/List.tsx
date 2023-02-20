@@ -8,8 +8,6 @@ const List: FC = () => {
     state: { photos },
   } = useContext(ContentContext);
 
-  console.log('photos', photos);
-
   const renderPhotos = () => {
     return (
       <div className={styles.photos} data-testid="list">

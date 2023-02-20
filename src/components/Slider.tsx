@@ -17,10 +17,6 @@ export const Slider: FC = () => {
     );
   }, []);
 
-  const handleDragEnd = (event: any, info: any) => {
-    console.log('info', info);
-  };
-
   return (
     <motion.div
       className={styles.slider}
@@ -28,7 +24,6 @@ export const Slider: FC = () => {
       whileTap={'grabbing'}
       data-testid="slider">
       <motion.div
-        onDragEnd={handleDragEnd}
         className={styles.slides}
         drag="x"
         dragConstraints={{ right: 0, left: -sliderWidth }}>
