@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { ContentProvider } from '../context/ContentProvider';
 import useFetchPhotos from './useFetchPhotos';
-import axios from 'axios';
-
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('useFetchPhotos', () => {
   it('should fetch photos and update state', async () => {
-    const data = [{ id: 1, title: 'Photo 1' }];
-    mockedAxios.get.mockResolvedValueOnce({ data });
+    const mockFetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve([{ id: 1, title: 'Photo 1' }]),
+      }),
+    );
 
-    const wrapper = ({ children }: any) => (
+    global.fetch = mockFetch;
+
+    const wrapper = ({ children }: { children: ReactNode }) => (
       <ContentProvider>{children}</ContentProvider>
     );
 
@@ -28,16 +30,21 @@ describe('useFetchPhotos', () => {
 
     expect(result.current.loading).toBe(false);
     expect(result.current.error).toBe(null);
-    expect(result.current.photos).toEqual(data);
+    expect(result.current.photos).toEqual([{ id: 1, title: 'Photo 1' }]);
 
-    expect(axios.get).toHaveBeenCalledWith(
+    expect(mockFetch).toHaveBeenCalledWith(
       'https://jsonplaceholder.typicode.com/photos?_limit=10',
     );
-  });
-  it('should handle error when fetching photos', async () => {
-    mockedAxios.get.mockRejectedValueOnce(new Error('Fetch error'));
 
-    const wrapper = ({ children }: any) => (
+    jest.clearAllMocks();
+  });
+
+  it('should handle error when fetching photos', async () => {
+    const mockFetch = jest.fn().mockRejectedValueOnce(new Error('Fetch error'));
+
+    global.fetch = mockFetch;
+
+    const wrapper = ({ children }: { children: ReactNode }) => (
       <ContentProvider>{children}</ContentProvider>
     );
 
@@ -56,9 +63,5 @@ describe('useFetchPhotos', () => {
       'An error occurred while fetching photos.',
     );
     expect(result.current.photos).toEqual([]);
-
-    expect(axios.get).toHaveBeenCalledWith(
-      'https://jsonplaceholder.typicode.com/photos?_limit=10',
-    );
   });
 });
