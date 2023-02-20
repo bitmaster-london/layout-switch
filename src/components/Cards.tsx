@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext, FC } from 'react';
 import { ContentContext } from '../context/ContentProvider';
 import styles from '../styles/Cards.module.scss';
 
-const Cards: React.FC = () => {
+const Cards: FC = () => {
   const {
     state: { photos },
   } = useContext(ContentContext);

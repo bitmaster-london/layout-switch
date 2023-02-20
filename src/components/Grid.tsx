@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext, FC } from 'react';
 import { ContentContext } from '../context/ContentProvider';
 import styles from '../styles/Grid.module.scss';
 
-const Grid: React.FC = () => {
+const Grid: FC = () => {
   const {
     state: { photos },
   } = useContext(ContentContext);

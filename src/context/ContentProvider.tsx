@@ -1,17 +1,5 @@
-import React, {
-  createContext,
-  useReducer,
-  FC,
-  ReactNode,
-  useEffect,
-} from 'react';
-import { Photo } from '../types';
-
-export type State = {
-  photos: Photo[];
-  loading: boolean;
-  error: string | null;
-};
+import React, { createContext, useReducer, FC, ReactNode } from 'react';
+import { Photo, State } from '../types';
 
 type ContextType = {
   state: State;
@@ -55,14 +43,14 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-type Props = {
-  children: ReactNode;
-};
-
 export const ContentContext = createContext<ContextType>({
   state: initialState,
   dispatch: () => null,
 });
+
+type Props = {
+  children: ReactNode;
+};
 
 export const ContentProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -1,4 +1,4 @@
-import React, { useContext, FC } from 'react';
+import { useContext, FC } from 'react';
 import { ContentContext } from '../context/ContentProvider';
 import { Photo } from '../types';
 import styles from '../styles/List.module.scss';
@@ -9,10 +9,6 @@ const List: FC = () => {
   } = useContext(ContentContext);
 
   const renderPhotos = () => {
-    if (!photos.length) {
-      return <div>Loading...</div>;
-    }
-
     return (
       <div className={styles.photos}>
         {photos.map((photo: Photo) => (

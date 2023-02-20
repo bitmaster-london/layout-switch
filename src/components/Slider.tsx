@@ -1,15 +1,15 @@
-import { FC, useEffect, useRef, useState } from 'react';
-import useContent from '../context/useContent';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
+import { ContentContext } from '../context/ContentProvider';
 import { motion } from 'framer-motion';
-import styles from '../styles/Slider.module.scss';
 import { Photo } from '../types';
+import styles from '../styles/Slider.module.scss';
 
 export const Slider: FC = () => {
   const [sliderWidth, setSliderWidth] = useState(0);
   const sliderRef = useRef<any>();
   const {
     state: { photos },
-  } = useContent();
+  } = useContext(ContentContext);
 
   useEffect(() => {
     setSliderWidth(
