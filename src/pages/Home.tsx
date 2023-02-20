@@ -64,8 +64,9 @@ const Home: FC = () => {
 
       <div className={styles.layoutSwitch}>
         <div className={styles.buttons}>
-          {switches.map((s: Switch) => (
+          {switches.map((s: Switch, index) => (
             <div
+              key={index}
               className={`${styles.button} ${
                 layout === s.layout ? styles.active : ''
               }`}
