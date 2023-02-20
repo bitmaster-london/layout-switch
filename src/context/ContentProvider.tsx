@@ -1,6 +1,11 @@
-import React, { createContext, useReducer, FC, ReactNode } from 'react';
+import React, {
+  createContext,
+  useReducer,
+  FC,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { Photo } from '../types';
-
 
 export type State = {
   photos: Photo[];
@@ -16,16 +21,11 @@ type ContextType = {
 const initialState: State = {
   photos: [],
   loading: true,
-  error: null
+  error: null,
 };
 
-export const ContentContext = createContext<ContextType>({
-  state: initialState,
-  dispatch: () => null,
-});
-
-type Action = 
-  | { type: 'FETCH_PHOTOS'; payload: Photo[]; }
+type Action =
+  | { type: 'FETCH_PHOTOS'; payload: Photo[] }
   | { type: 'SET_ERROR'; payload: string }
   | { type: 'SET_LOADING' };
 
@@ -36,19 +36,19 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         photos: action.payload,
         loading: false,
-        error: null
+        error: null,
       };
     case 'SET_ERROR':
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: action.payload,
       };
     case 'SET_LOADING':
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
     default:
       return state;
@@ -58,6 +58,11 @@ const reducer = (state: State, action: Action): State => {
 type Props = {
   children: ReactNode;
 };
+
+export const ContentContext = createContext<ContextType>({
+  state: initialState,
+  dispatch: () => null,
+});
 
 export const ContentProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
