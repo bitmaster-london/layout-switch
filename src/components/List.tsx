@@ -8,9 +8,11 @@ const List: FC = () => {
     state: { photos },
   } = useContext(ContentContext);
 
+  console.log('photos', photos);
+
   const renderPhotos = () => {
     return (
-      <div className={styles.photos}>
+      <div className={styles.photos} data-testid="list">
         {photos.map((photo: Photo) => (
           <div key={photo.id} className={styles.photo}>
             <img src={photo.thumbnailUrl} alt={photo.title} />

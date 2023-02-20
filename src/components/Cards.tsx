@@ -8,7 +8,7 @@ const Cards: FC = () => {
   } = useContext(ContentContext);
 
   return (
-    <div className={styles.cards}>
+    <div className={styles.cards} data-testid="cards">
       {photos.map((photo) => (
         <div key={photo.id} className={styles.card}>
           <img src={photo.thumbnailUrl} alt={photo.title} />

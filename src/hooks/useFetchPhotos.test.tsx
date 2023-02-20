@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { ContentProvider } from '../context/ContentProvider';
 import useFetchPhotos from './useFetchPhotos';

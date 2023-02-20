@@ -22,7 +22,11 @@ export const Slider: FC = () => {
   };
 
   return (
-    <motion.div className={styles.slider} ref={sliderRef} whileTap={'grabbing'}>
+    <motion.div
+      className={styles.slider}
+      ref={sliderRef}
+      whileTap={'grabbing'}
+      data-testid="slider">
       <motion.div
         onDragEnd={handleDragEnd}
         className={styles.slides}

@@ -8,7 +8,7 @@ const Grid: FC = () => {
   } = useContext(ContentContext);
 
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} data-testid="grid">
       {photos.map((photo) => (
         <div key={photo.id} className={styles.card}>
           <img src={photo.thumbnailUrl} alt={photo.title} />
